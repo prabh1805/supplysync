@@ -161,3 +161,299 @@ This ensures all Spring Cloud libraries use compatible versions. Without it, you
 ---
 
 *This document will be updated as new services and classes are added.*
+
+### 3. API Gateway (Spring Cloud Gateway)
+
+**What it does:** Single entry point for all client requests. Routes requests to the correct microservice, handles cross-cutting concerns like rate limiting, authentication forwarding, and CORS.
+
+**File: `ApiGatewayApplication.java`**
+
+```java
+@SpringBootApplication
+public class ApiGatewayApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ApiGatewayApplication.class, args);
+    }
+}
+```
+
+No special annotation needed — the Gateway starter auto-configures everything.
+
+**Configuration: `application.properties`**
+
+```properties
+spring.application.name=api-gateway
+server.port=8080
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+spring.cloud.gateway.discovery.locator.enabled=true
+spring.cloud.gateway.discovery.locator.lower-case-service-id=true
+```
+
+| Property | What it does |
+|---|---|
+| `spring.cloud.gateway.discovery.locator.enabled=true` | Auto-creates routes for every service in Eureka. If `tenant-service` is registered, you can hit `http://localhost:8080/tenant-service/api/v1/tenants` and it routes automatically. |
+| `spring.cloud.gateway.discovery.locator.lower-case-service-id=true` | Eureka registers services in UPPERCASE. This lets you use lowercase in URLs. |
+
+**Dependency:**
+
+```groovy
+implementation 'org.springframework.cloud:spring-cloud-starter-gateway-server-webmvc'
+```
+
+This is the servlet-based (MVC) variant of Spring Cloud Gateway. There's also a reactive variant (`spring-cloud-starter-gateway`). MVC variant runs on Tomcat, reactive runs on Netty.
+
+---
+
+## Phase 2: Tenant Service
+
+---
+
+### 4. Tenant Service
+
+**What it does:** Manages tenant (company) onboarding, configuration, and lifecycle. Every other service depends on tenant context. This is the backbone of multi-tenancy.
+
+---
+
+#### Entity: `Tenant.java`
+
+```java
+@Entity
+@Table(name="tenants")
+@EntityListeners(AuditingEntityListener.class)
+@Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
+public class Tenant {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    @Column(nullable = false, unique = true)
+    private String name;
+
+    @Column(nullable = false, unique = true)
+    private String subdomain;
+
+    private String dbSchema;
+
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private Plan plan = Plan.FREE;
+
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private Status status = Status.ACTIVE;
+
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
+}
+```
+
+**Annotations explained:**
+
+| Annotation | What it does |
+|---|---|
+| `@Entity` | Marks this class as a JPA entity — Hibernate will map it to a database table. |
+| `@Table(name="tenants")` | Specifies the table name. Without it, Hibernate uses the class name. |
+| `@EntityListeners(AuditingEntityListener.class)` | Registers the JPA auditing listener on this entity. Required for `@CreatedDate` and `@LastModifiedDate` to work. Without this, those fields stay null. |
+| `@Id` | Marks the primary key field. |
+| `@GeneratedValue(strategy = GenerationType.UUID)` | Auto-generates a UUID for the primary key on insert. |
+| `@Column(nullable = false, unique = true)` | Database constraints — NOT NULL and UNIQUE. Enforced at the DB level. |
+| `@Enumerated(EnumType.STRING)` | Stores the enum as its string name (e.g., "FREE") instead of ordinal (0, 1, 2). Always use STRING — ordinals break if you reorder enum values. |
+| `@Builder.Default` | When using `@Builder`, fields with default values need this annotation, otherwise the builder ignores the default and sets null. |
+| `@CreatedDate` | JPA auditing — automatically sets this field to the current timestamp when the entity is first persisted. Requires `@EnableJpaAuditing` on the main class AND `@EntityListeners` on the entity. |
+| `@LastModifiedDate` | JPA auditing — automatically updates this field to the current timestamp on every save/update. |
+| `@EnableJpaAuditing` | Goes on the main application class. Enables Spring Data JPA's auditing infrastructure globally. Without this, `@CreatedDate` and `@LastModifiedDate` do nothing. |
+
+**Lombok annotations on entities:**
+
+| Annotation | What it does |
+|---|---|
+| `@Getter` / `@Setter` | Generates getters and setters for all fields. |
+| `@Builder` | Generates a builder pattern — `Tenant.builder().name("Acme").build()`. Cleaner than telescoping constructors. |
+| `@NoArgsConstructor` | Generates a no-args constructor. Required by JPA — Hibernate needs it to instantiate entities via reflection. |
+| `@AllArgsConstructor` | Generates an all-args constructor. Required by `@Builder` when `@NoArgsConstructor` is also present. |
+
+---
+
+#### DTOs: `TenantRequest.java` and `TenantResponse.java`
+
+```java
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
+public class TenantRequest {
+    private String name;
+    private String subdomain;
+    private String plan;
+}
+```
+
+**Why DTOs?** Never expose your entity directly to the API. Reasons:
+1. Security — entities may have fields you don't want clients to see or set
+2. Decoupling — your API contract shouldn't change when your DB schema changes
+3. Validation — DTOs can have different validation rules than entities
+
+**Why `@NoArgsConstructor` + `@AllArgsConstructor` on DTOs?**
+Jackson (the JSON serializer) needs a no-args constructor to create an empty object, then uses setters to fill fields from JSON. `@Builder` generates only a private all-args constructor. Without `@NoArgsConstructor`, Jackson throws: `Type definition error: [simple type, class TenantRequest]`.
+
+Rule: On any DTO that receives JSON via `@RequestBody`, always add `@NoArgsConstructor` + `@AllArgsConstructor` alongside `@Builder`.
+
+---
+
+#### Repository: `TenantRepository.java`
+
+```java
+@Repository
+public interface TenantRepository extends JpaRepository<Tenant, UUID> {
+    Optional<Tenant> findBySubdomain(String subdomain);
+}
+```
+
+| Concept | Explanation |
+|---|---|
+| `JpaRepository<Tenant, UUID>` | Provides CRUD operations for free: `save()`, `findById()`, `findAll()`, `delete()`, etc. The generics are `<EntityType, PrimaryKeyType>`. |
+| `findBySubdomain(String)` | Spring Data query derivation — Spring reads the method name and generates the SQL: `SELECT * FROM tenants WHERE subdomain = ?`. No implementation needed. |
+| `Optional<Tenant>` | Returns an Optional because the tenant might not exist. Forces you to handle the "not found" case explicitly. |
+
+---
+
+#### Service: `TenantService.java`
+
+Key patterns used:
+- **Builder pattern** — constructing `Tenant` and `TenantResponse` objects
+- **Method reference** — `this::mapToResponse` in stream operations
+- **Stream API** — `.stream().map().toList()` instead of manual loops
+
+```java
+// Stream API example — cleaner than ArrayList + forEach
+return tenantRepository.findAll()
+        .stream()
+        .map(this::mapToResponse)
+        .toList();
+```
+
+---
+
+#### Controller: `TenantController.java`
+
+**Annotations explained:**
+
+| Annotation | What it does |
+|---|---|
+| `@RestController` | Combo of `@Controller` + `@ResponseBody`. Every method return value is serialized to JSON automatically. |
+| `@RequestMapping("/api/v1/tenants")` | Base URL path for all endpoints in this controller. |
+| `@PostMapping` | Maps HTTP POST requests. `POST /api/v1/tenants` = create a tenant. |
+| `@GetMapping("/{id}")` | Maps HTTP GET with a path variable. `{id}` is extracted into the method parameter. |
+| `@PatchMapping` | Maps HTTP PATCH — for partial updates (e.g., just updating status). |
+| `@PathVariable` | Extracts a value from the URL path. `/{id}` → `@PathVariable UUID id`. |
+| `@RequestBody` | Deserializes the JSON request body into the parameter object. |
+| `@RequiredArgsConstructor` | Lombok — generates a constructor for all `final` fields. Spring uses this for dependency injection (constructor injection). |
+
+**ResponseEntity and HTTP Status Codes:**
+
+```java
+// 201 Created — for POST (new resource created)
+return ResponseEntity.status(HttpStatus.CREATED).body(res);
+
+// 200 OK — for GET (returning existing data)
+return ResponseEntity.ok(res);
+```
+
+| Status Code | When to use |
+|---|---|
+| 200 OK | Successful GET, PATCH, PUT |
+| 201 Created | Successful POST (new resource) |
+| 400 Bad Request | Invalid input from client |
+| 404 Not Found | Resource doesn't exist |
+| 409 Conflict | Duplicate resource (e.g., subdomain already taken) |
+| 500 Internal Server Error | Unexpected server failure |
+
+---
+
+#### Custom Exception Handling
+
+**Exception classes:** Simple classes extending `RuntimeException`:
+- `TenantNotFoundException` → thrown when tenant not found by ID or subdomain
+- `TenantAlreadyExistsException` → thrown when creating a tenant with duplicate subdomain
+- `InvalidRequestException` → thrown for bad input (null fields, etc.)
+
+**`GlobalExceptionHandler.java` — the key piece:**
+
+```java
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(TenantNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleTenantNotFound(TenantNotFoundException ex) {
+        ErrorResponse error = ErrorResponse.builder()
+                .status(HttpStatus.NOT_FOUND.value())
+                .error("Not Found")
+                .message(ex.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+    // ... more handlers
+}
+```
+
+| Concept | Explanation |
+|---|---|
+| `@RestControllerAdvice` | `@ControllerAdvice` + `@ResponseBody`. Intercepts exceptions from ALL controllers. Spring looks for matching `@ExceptionHandler` methods here before returning errors to the client. |
+| `@ExceptionHandler(SomeException.class)` | Tells Spring "when this exception type is thrown, call this method." Spring matches the most specific exception first. |
+| `ErrorResponse` | A DTO for consistent error JSON. Every error returns the same structure: status, error label, message, timestamp. |
+| Generic `Exception` handler | Safety net — catches anything not explicitly handled. Returns 500 with a generic message. Never leak internal details to clients. |
+
+**The flow:**
+```
+Controller → Service throws TenantNotFoundException
+  → Spring catches it
+  → Finds @ExceptionHandler(TenantNotFoundException.class) in GlobalExceptionHandler
+  → Builds ErrorResponse with 404
+  → Returns JSON to client
+```
+
+---
+
+## Architecture So Far
+
+```
+┌─────────────────────┐
+│   Discovery Server  │  ← Port 8761
+│   (Eureka Server)   │
+└─────────┬───────────┘
+          │ registers
+┌─────────▼───────────┐
+│    Config Server    │  ← Port 8888
+│  (Eureka Client)    │
+└─────────┬───────────┘
+          │ registers
+┌─────────▼───────────┐
+│    API Gateway      │  ← Port 8080
+│  (Eureka Client)    │
+└─────────┬───────────┘
+          │ routes to
+┌─────────▼───────────┐
+│   Tenant Service    │  ← Port 8081
+│  (Eureka Client)    │  ← PostgreSQL: supplysync_tenants
+└─────────────────────┘
+```
+
+---
+
+## Lessons Learned
+
+1. **Lombok `@Builder` + Jackson**: DTOs that receive JSON via `@RequestBody` need `@NoArgsConstructor` + `@AllArgsConstructor`. Without them, Jackson can't deserialize the JSON.
+
+2. **JPA Auditing requires two things**: `@EnableJpaAuditing` on the main class AND `@EntityListeners(AuditingEntityListener.class)` on each entity using `@CreatedDate`/`@LastModifiedDate`.
+
+3. **Route conflicts**: `@GetMapping("/{id}")` and `@GetMapping("/{subdomain}")` conflict — Spring can't distinguish them. Use `/subdomain/{subdomain}` for the second one.
+
+4. **REST conventions**: POST returns 201, not 200. Use `ResponseEntity.status(HttpStatus.CREATED).body(res)`.
+
+5. **Eureka is non-blocking**: If the discovery server is down, services still start — Eureka registration fails silently and retries in the background.
+
+---
+
+*This document will be updated as new services and classes are added.*

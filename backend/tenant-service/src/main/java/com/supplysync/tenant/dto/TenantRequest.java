@@ -1,10 +1,14 @@
 package com.supplysync.tenant.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class TenantRequest {
     private String name;       // company name — required
     private String subdomain;  // unique identifier like "acme" — required
