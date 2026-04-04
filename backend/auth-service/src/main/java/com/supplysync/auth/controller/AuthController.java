@@ -21,10 +21,9 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
 
-    // stub for now — will implement proper auth with JWT later
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-        AuthResponse res = userService.findByEmail(request.getEmail());
+        AuthResponse res = userService.login(request);
         return ResponseEntity.ok(res);
     }
 }
