@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>DSA Assignments</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">DSA Assignments</h1>
+</header>
+<h1 id="dsa-assignments-final-test">DSA Assignments &amp; Final
+Test</h1>
+<hr />
+<h2 id="week-1-assignment-day-7-apr-11">Week 1 Assignment (Day 7 — Apr
+11)</h2>
+<p><strong>Topics Covered:</strong> Two Pointers, Sliding Window, Binary
+Search, Matrix, Intervals, Greedy <strong>Time Limit: 3 hours | No hints
+| Simulate contest</strong></p>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 209 — Minimum Size Subarray Sum</td>
+<td>Medium</td>
+<td>Sliding Window</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 74 — Search a 2D Matrix</td>
+<td>Medium</td>
+<td>Binary Search</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 1011 — Capacity To Ship Packages Within D Days</td>
+<td>Medium</td>
+<td>BS on answer</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 763 — Partition Labels</td>
+<td>Medium</td>
+<td>Greedy</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 4 — Median of Two Sorted Arrays</td>
+<td>Hard</td>
+<td>Binary Search</td>
+</tr>
+<tr>
+<td>6</td>
+<td>CF 1399D — Binary String To Subsequences</td>
+<td>1500</td>
+<td>Greedy</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Scoring:</strong> 6/6 = Excellent | 4-5 = Good | &lt;4 =
+Revisit weak patterns</p>
+<hr />
+<h2 id="week-2-assignment-day-14-apr-18">Week 2 Assignment (Day 14 — Apr
+18)</h2>
+<p><strong>Topics Covered:</strong> Monotonic Stack, Stack/Queue, Linked
+Lists, Hashing, Heaps <strong>Time Limit: 3 hours | No hints | Simulate
+contest</strong></p>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 316 — Remove Duplicate Letters</td>
+<td>Medium</td>
+<td>Monotonic Stack + Greedy</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 146 — LRU Cache</td>
+<td>Medium</td>
+<td>HashMap + DLL</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 23 — Merge k Sorted Lists</td>
+<td>Hard</td>
+<td>Heap</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 862 — Shortest Subarray with Sum at Least K</td>
+<td>Hard</td>
+<td>Deque</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 432 — All O(1) Data Structure</td>
+<td>Hard</td>
+<td>Design</td>
+</tr>
+<tr>
+<td>6</td>
+<td>CF 1475D — Cleaning the Phone</td>
+<td>1400</td>
+<td>Prefix Sum + Sort</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Scoring:</strong> 6/6 = Excellent | 4-5 = Good | &lt;4 =
+Revisit weak patterns</p>
+<hr />
+<h2 id="week-3-assignment-day-21-apr-25">Week 3 Assignment (Day 21 — Apr
+25)</h2>
+<p><strong>Topics Covered:</strong> Binary Trees, BST, Trie, Graph
+BFS/DFS, Advanced Graphs, Backtracking <strong>Time Limit: 3 hours | No
+hints | Simulate contest</strong></p>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 297 — Serialize and Deserialize Binary Tree</td>
+<td>Hard</td>
+<td>BFS/DFS</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 269 — Alien Dictionary</td>
+<td>Hard</td>
+<td>Topological Sort <em>(Premium — use LintCode 892)</em></td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 778 — Swim in Rising Water</td>
+<td>Hard</td>
+<td>Dijkstra / BS + BFS</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 1192 — Critical Connections in a Network</td>
+<td>Hard</td>
+<td>Tarjan’s</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 37 — Sudoku Solver</td>
+<td>Hard</td>
+<td>Backtracking</td>
+</tr>
+<tr>
+<td>6</td>
+<td>CF 1593D1 — Half of Same</td>
+<td>1500</td>
+<td>Math + HashMap</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Scoring:</strong> 6/6 = Excellent | 4-5 = Good | &lt;4 =
+Revisit weak patterns</p>
+<hr />
+<h2 id="week-4-assignment-final-comprehensive-test-day-30-may-4">Week 4
+Assignment — FINAL COMPREHENSIVE TEST (Day 30 — May 4)</h2>
+<p><strong>All Topics | Time Limit: 4 hours | No hints, no solutions |
+Simulate real interview</strong></p>
+<h3 id="section-a-easy-warmup-20-min">Section A: Easy Warmup (20
+min)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 169 — Majority Element</td>
+<td>Arrays</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 121 — Best Time to Buy and Sell Stock</td>
+<td>Greedy/DP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-b-medium-core-90-min">Section B: Medium Core (90
+min)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>LC 238 — Product of Array Except Self</td>
+<td>Arrays</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 102 — Binary Tree Level Order Traversal</td>
+<td>Trees / BFS</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 322 — Coin Change</td>
+<td>DP</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 133 — Clone Graph</td>
+<td>Graph / DFS</td>
+</tr>
+<tr>
+<td>7</td>
+<td>LC 155 — Min Stack</td>
+<td>Design</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-c-medium-hard-60-min">Section C: Medium-Hard (60
+min)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>LC 11 — Container With Most Water</td>
+<td>Two Pointers</td>
+</tr>
+<tr>
+<td>9</td>
+<td>LC 210 — Course Schedule II</td>
+<td>Topological Sort</td>
+</tr>
+<tr>
+<td>10</td>
+<td>LC 152 — Maximum Product Subarray</td>
+<td>DP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-d-hard-70-min">Section D: Hard (70 min)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>11</td>
+<td>LC 295 — Find Median from Data Stream</td>
+<td>Heap Design</td>
+</tr>
+<tr>
+<td>12</td>
+<td>LC 76 — Minimum Window Substring</td>
+<td>Sliding Window</td>
+</tr>
+<tr>
+<td>13</td>
+<td>LC 312 — Burst Balloons</td>
+<td>Interval DP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="final-scoring">Final Scoring</h3>
+<table>
+<thead>
+<tr>
+<th>Score</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>11-13</td>
+<td>FAANG Ready</td>
+</tr>
+<tr>
+<td>8-10</td>
+<td>Strong — keep grinding mediums</td>
+</tr>
+<tr>
+<td>5-7</td>
+<td>Decent — revisit weak patterns</td>
+</tr>
+<tr>
+<td>&lt;5</td>
+<td>Need more time — extend by 2 weeks</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2
+id="self-evaluation-template-use-after-each-assignment">Self-Evaluation
+Template (use after each assignment)</h2>
+<pre><code>Assignment: Week ___
+Date: ___
+Score: ___ / 6 (or /13 for final)
+
+Problems I couldn&#39;t solve:
+1. ___  Reason: ___
+2. ___  Reason: ___
+
+Patterns I need to revisit:
+- ___
+- ___
+
+Action items for next week:
+- ___
+- ___</code></pre>
+<hr />
+<p><em>Convert to PDF:
+<code>pandoc DSA_ASSIGNMENTS.md -o DSA_ASSIGNMENTS.pdf</code></em></p>
+</body>
+</html>

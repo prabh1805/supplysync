@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>DSA 30 Day Plan</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">DSA 30 Day Plan</h1>
+</header>
+<h1 id="dsa-30-day-faangmaang-plan-daily-problems">DSA 30-Day
+FAANG/MAANG Plan — Daily Problems</h1>
+<h3 id="starting-date-april-5-end-date-may-4">Starting Date: April 5 |
+End Date: May 4</h3>
+<h3 id="goal-faang-ready-problem-solving-codeforces-1200-1400">Goal:
+FAANG-ready problem solving + Codeforces 1200 → 1400</h3>
+<h3
+id="format-6-problemsday-2-easy-3-medium-1-hard-assignments-in-separate-file">Format:
+6 problems/day (2 Easy, 3 Medium, 1 Hard) | Assignments in separate
+file</h3>
+<hr />
+<h2
+id="week-1-apr-511-arrays-sliding-window-two-pointers-binary-search">WEEK
+1 (Apr 5–11): Arrays, Sliding Window, Two Pointers, Binary Search</h2>
+<h3 id="day-1-apr-5-two-pointers-prefix-sum">Day 1 (Apr 5) — Two
+Pointers + Prefix Sum</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 283 — Move Zeroes</td>
+<td>Easy</td>
+<td>Two Pointers</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 977 — Squares of a Sorted Array</td>
+<td>Easy</td>
+<td>Two Pointers</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 15 — 3Sum</td>
+<td>Medium</td>
+<td>Two Pointers + Sort</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 18 — 4Sum</td>
+<td>Medium</td>
+<td>Two Pointers + Sort</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 560 — Subarray Sum Equals K</td>
+<td>Medium</td>
+<td>Prefix Sum + HashMap</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 42 — Trapping Rain Water</td>
+<td>Hard</td>
+<td>Two Pointers / Stack</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-2-apr-6-sliding-window">Day 2 (Apr 6) — Sliding Window</h3>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 643 — Maximum Average Subarray I</td>
+<td>Easy</td>
+<td>Fixed Window</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 219 — Contains Duplicate II</td>
+<td>Easy</td>
+<td>Sliding Window + Set</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 3 — Longest Substring Without Repeating Characters</td>
+<td>Medium</td>
+<td>Variable Window</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 424 — Longest Repeating Character Replacement</td>
+<td>Medium</td>
+<td>Variable Window</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 567 — Permutation in String</td>
+<td>Medium</td>
+<td>Fixed Window + Freq</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 76 — Minimum Window Substring</td>
+<td>Hard</td>
+<td>Variable Window</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-3-apr-7-binary-search-variants">Day 3 (Apr 7) — Binary
+Search Variants</h3>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 35 — Search Insert Position</td>
+<td>Easy</td>
+<td>Standard BS</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 744 — Find Smallest Letter Greater Than Target</td>
+<td>Easy</td>
+<td>BS on answer</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 33 — Search in Rotated Sorted Array</td>
+<td>Medium</td>
+<td>Modified BS</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 153 — Find Minimum in Rotated Sorted Array</td>
+<td>Medium</td>
+<td>Modified BS</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 875 — Koko Eating Bananas</td>
+<td>Medium</td>
+<td>BS on answer</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 410 — Split Array Largest Sum</td>
+<td>Hard</td>
+<td>BS on answer</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-4-apr-8-matrix-intervals">Day 4 (Apr 8) — Matrix +
+Intervals</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 48 — Rotate Image</td>
+<td>Medium</td>
+<td>Matrix manipulation</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 54 — Spiral Matrix</td>
+<td>Medium</td>
+<td>Simulation</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 56 — Merge Intervals</td>
+<td>Medium</td>
+<td>Sort + Merge</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 435 — Non-overlapping Intervals</td>
+<td>Medium</td>
+<td>Greedy + Sort</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 57 — Insert Interval</td>
+<td>Medium</td>
+<td>Intervals</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 239 — Sliding Window Maximum</td>
+<td>Hard</td>
+<td>Monotonic Deque</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-5-apr-9-greedy-sorting-tricks">Day 5 (Apr 9) — Greedy +
+Sorting Tricks</h3>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 455 — Assign Cookies</td>
+<td>Easy</td>
+<td>Greedy</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 605 — Can Place Flowers</td>
+<td>Easy</td>
+<td>Greedy</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 452 — Minimum Number of Arrows to Burst Balloons</td>
+<td>Medium</td>
+<td>Greedy + Sort</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 621 — Task Scheduler</td>
+<td>Medium</td>
+<td>Greedy + Heap</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 846 — Hand of Straights</td>
+<td>Medium</td>
+<td>Greedy + Map</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 135 — Candy</td>
+<td>Hard</td>
+<td>Greedy (two pass)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-6-apr-10-codeforces-practice-rating-1200-1400">Day 6 (Apr
+10) — Codeforces Practice (Rating 1200-1400)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Rating</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>CF 1A — Theatre Square</td>
+<td>1000</td>
+<td>Math/Greedy</td>
+</tr>
+<tr>
+<td>2</td>
+<td>CF 158B — Taxi</td>
+<td>1100</td>
+<td>Greedy</td>
+</tr>
+<tr>
+<td>3</td>
+<td>CF 1352C — K-th Not Divisible by N</td>
+<td>1200</td>
+<td>Math/BS</td>
+</tr>
+<tr>
+<td>4</td>
+<td>CF 1353C — Board Moves</td>
+<td>1200</td>
+<td>Math</td>
+</tr>
+<tr>
+<td>5</td>
+<td>CF 1374C — Move Brackets</td>
+<td>1200</td>
+<td>Greedy/Stack</td>
+</tr>
+<tr>
+<td>6</td>
+<td>CF 1399C — Boats Competition</td>
+<td>1300</td>
+<td>Two Pointers</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-7-apr-11-week-1-assignment-see-dsa_assignments.md">Day 7
+(Apr 11) — WEEK 1 ASSIGNMENT → See DSA_ASSIGNMENTS.md</h3>
+<hr />
+<h2 id="week-2-apr-1218-stacks-queues-linked-lists-hashing-heaps">WEEK 2
+(Apr 12–18): Stacks, Queues, Linked Lists, Hashing, Heaps</h2>
+<h3 id="day-8-apr-12-monotonic-stack">Day 8 (Apr 12) — Monotonic
+Stack</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 496 — Next Greater Element I</td>
+<td>Easy</td>
+<td>Monotonic Stack</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 1475 — Final Prices With Discount</td>
+<td>Easy</td>
+<td>Monotonic Stack</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 739 — Daily Temperatures</td>
+<td>Medium</td>
+<td>Monotonic Stack</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 503 — Next Greater Element II</td>
+<td>Medium</td>
+<td>Circular + Stack</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 907 — Sum of Subarray Minimums</td>
+<td>Medium</td>
+<td>Monotonic Stack</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 84 — Largest Rectangle in Histogram</td>
+<td>Hard</td>
+<td>Monotonic Stack</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-9-apr-13-stack-applications-queues">Day 9 (Apr 13) — Stack
+Applications + Queues</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 20 — Valid Parentheses</td>
+<td>Easy</td>
+<td>Stack</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 232 — Implement Queue using Stacks</td>
+<td>Easy</td>
+<td>Design</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 150 — Evaluate Reverse Polish Notation</td>
+<td>Medium</td>
+<td>Stack</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 394 — Decode String</td>
+<td>Medium</td>
+<td>Stack</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 735 — Asteroid Collision</td>
+<td>Medium</td>
+<td>Stack</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 85 — Maximal Rectangle</td>
+<td>Hard</td>
+<td>Stack + DP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-10-apr-14-linked-lists">Day 10 (Apr 14) — Linked Lists</h3>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 206 — Reverse Linked List</td>
+<td>Easy</td>
+<td>Iterative/Recursive</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 21 — Merge Two Sorted Lists</td>
+<td>Easy</td>
+<td>Two Pointers</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 143 — Reorder List</td>
+<td>Medium</td>
+<td>Fast/Slow + Reverse</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 138 — Copy List with Random Pointer</td>
+<td>Medium</td>
+<td>HashMap / Interweave</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 148 — Sort List</td>
+<td>Medium</td>
+<td>Merge Sort</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 25 — Reverse Nodes in k-Group</td>
+<td>Hard</td>
+<td>Iterative Reverse</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-11-apr-15-hashing-patterns">Day 11 (Apr 15) — Hashing
+Patterns</h3>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 1 — Two Sum</td>
+<td>Easy</td>
+<td>HashMap</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 242 — Valid Anagram</td>
+<td>Easy</td>
+<td>Frequency Map</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 49 — Group Anagrams</td>
+<td>Medium</td>
+<td>HashMap + Sort</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 128 — Longest Consecutive Sequence</td>
+<td>Medium</td>
+<td>HashSet</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 380 — Insert Delete GetRandom O(1)</td>
+<td>Medium</td>
+<td>HashMap + ArrayList</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 460 — LFU Cache</td>
+<td>Hard</td>
+<td>HashMap + DLL</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-12-apr-16-heap-priority-queue">Day 12 (Apr 16) — Heap /
+Priority Queue</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 703 — Kth Largest Element in a Stream</td>
+<td>Easy</td>
+<td>Min Heap</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 1046 — Last Stone Weight</td>
+<td>Easy</td>
+<td>Max Heap</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 347 — Top K Frequent Elements</td>
+<td>Medium</td>
+<td>Heap / Bucket Sort</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 355 — Design Twitter</td>
+<td>Medium</td>
+<td>Heap + Design</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 973 — K Closest Points to Origin</td>
+<td>Medium</td>
+<td>Heap</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 295 — Find Median from Data Stream</td>
+<td>Hard</td>
+<td>Two Heaps</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-13-apr-17-codeforces-practice-rating-1300-1500">Day 13 (Apr
+17) — Codeforces Practice (Rating 1300-1500)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Rating</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>CF 1360D — Buying Shovels</td>
+<td>1300</td>
+<td>Math</td>
+</tr>
+<tr>
+<td>2</td>
+<td>CF 1385C — Make It Good</td>
+<td>1300</td>
+<td>Stack/Greedy</td>
+</tr>
+<tr>
+<td>3</td>
+<td>CF 1409D — Decrease the Sum of Digits</td>
+<td>1400</td>
+<td>Greedy</td>
+</tr>
+<tr>
+<td>4</td>
+<td>CF 1433D — Districts Connection</td>
+<td>1400</td>
+<td>Constructive</td>
+</tr>
+<tr>
+<td>5</td>
+<td>CF 1462D — Add to Neighbour and Remove</td>
+<td>1400</td>
+<td>Prefix Sum</td>
+</tr>
+<tr>
+<td>6</td>
+<td>CF 1472D — Even-Odd Game</td>
+<td>1400</td>
+<td>Greedy + Sort</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-14-apr-18-week-2-assignment-see-dsa_assignments.md">Day 14
+(Apr 18) — WEEK 2 ASSIGNMENT → See DSA_ASSIGNMENTS.md</h3>
+<hr />
+<h2 id="week-3-apr-1925-trees-graphs-backtracking">WEEK 3 (Apr 19–25):
+Trees, Graphs, Backtracking</h2>
+<h3 id="day-15-apr-19-binary-trees">Day 15 (Apr 19) — Binary Trees</h3>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 104 — Maximum Depth of Binary Tree</td>
+<td>Easy</td>
+<td>DFS</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 226 — Invert Binary Tree</td>
+<td>Easy</td>
+<td>DFS/BFS</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 236 — Lowest Common Ancestor</td>
+<td>Medium</td>
+<td>DFS</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 105 — Construct BT from Preorder and Inorder</td>
+<td>Medium</td>
+<td>Recursion</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 437 — Path Sum III</td>
+<td>Medium</td>
+<td>DFS + Prefix Sum</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 124 — Binary Tree Maximum Path Sum</td>
+<td>Hard</td>
+<td>DFS</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-16-apr-20-bst-trie">Day 16 (Apr 20) — BST + Trie</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 700 — Search in a BST</td>
+<td>Easy</td>
+<td>BST</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 530 — Minimum Absolute Difference in BST</td>
+<td>Easy</td>
+<td>Inorder</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 98 — Validate BST</td>
+<td>Medium</td>
+<td>Inorder / Range</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 230 — Kth Smallest Element in BST</td>
+<td>Medium</td>
+<td>Inorder</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 208 — Implement Trie</td>
+<td>Medium</td>
+<td>Trie</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 212 — Word Search II</td>
+<td>Hard</td>
+<td>Trie + Backtracking</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-17-apr-21-graph-bfsdfs">Day 17 (Apr 21) — Graph BFS/DFS</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 733 — Flood Fill</td>
+<td>Easy</td>
+<td>BFS/DFS</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 463 — Island Perimeter</td>
+<td>Easy</td>
+<td>Grid</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 200 — Number of Islands</td>
+<td>Medium</td>
+<td>BFS/DFS</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 994 — Rotting Oranges</td>
+<td>Medium</td>
+<td>Multi-source BFS</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 207 — Course Schedule</td>
+<td>Medium</td>
+<td>Topological Sort</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 127 — Word Ladder</td>
+<td>Hard</td>
+<td>BFS</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-18-apr-22-graph-advanced">Day 18 (Apr 22) — Graph
+Advanced</h3>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 547 — Number of Provinces</td>
+<td>Medium</td>
+<td>Union Find / DFS</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 684 — Redundant Connection</td>
+<td>Medium</td>
+<td>Union Find</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 743 — Network Delay Time</td>
+<td>Medium</td>
+<td>Dijkstra</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 787 — Cheapest Flights Within K Stops</td>
+<td>Medium</td>
+<td>Bellman-Ford / BFS</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 1584 — Min Cost to Connect All Points</td>
+<td>Medium</td>
+<td>Prim’s / Kruskal’s</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 332 — Reconstruct Itinerary</td>
+<td>Hard</td>
+<td>Euler Path + DFS</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-19-apr-23-backtracking">Day 19 (Apr 23) — Backtracking</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 77 — Combinations</td>
+<td>Medium</td>
+<td>Backtracking</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 78 — Subsets</td>
+<td>Medium</td>
+<td>Backtracking</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 46 — Permutations</td>
+<td>Medium</td>
+<td>Backtracking</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 39 — Combination Sum</td>
+<td>Medium</td>
+<td>Backtracking</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 131 — Palindrome Partitioning</td>
+<td>Medium</td>
+<td>Backtracking</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 51 — N-Queens</td>
+<td>Hard</td>
+<td>Backtracking</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-20-apr-24-codeforces-practice-rating-1400-1600">Day 20 (Apr
+24) — Codeforces Practice (Rating 1400-1600)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Rating</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>CF 1520D — Same Differences</td>
+<td>1400</td>
+<td>Math + HashMap</td>
+</tr>
+<tr>
+<td>2</td>
+<td>CF 1538C — Number of Pairs</td>
+<td>1400</td>
+<td>Binary Search</td>
+</tr>
+<tr>
+<td>3</td>
+<td>CF 1551C — Interesting Story</td>
+<td>1500</td>
+<td>Greedy + Sort</td>
+</tr>
+<tr>
+<td>4</td>
+<td>CF 1560D — Make a Power of Two</td>
+<td>1500</td>
+<td>Greedy + Strings</td>
+</tr>
+<tr>
+<td>5</td>
+<td>CF 1579D — Productive Meeting</td>
+<td>1500</td>
+<td>Greedy + Heap</td>
+</tr>
+<tr>
+<td>6</td>
+<td>CF 1607D — Blue-Red Permutation</td>
+<td>1500</td>
+<td>Greedy + Sort</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-21-apr-25-week-3-assignment-see-dsa_assignments.md">Day 21
+(Apr 25) — WEEK 3 ASSIGNMENT → See DSA_ASSIGNMENTS.md</h3>
+<hr />
+<h2 id="week-4-apr-26may-4-dp-advanced-topics-final-test">WEEK 4 (Apr
+26–May 4): DP, Advanced Topics, Final Test</h2>
+<h3 id="day-22-apr-26-1d-dp">Day 22 (Apr 26) — 1D DP</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 70 — Climbing Stairs</td>
+<td>Easy</td>
+<td>Classic DP</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 746 — Min Cost Climbing Stairs</td>
+<td>Easy</td>
+<td>Classic DP</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 198 — House Robber</td>
+<td>Medium</td>
+<td>Linear DP</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 300 — Longest Increasing Subsequence</td>
+<td>Medium</td>
+<td>DP + BS</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 139 — Word Break</td>
+<td>Medium</td>
+<td>DP + Set</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 32 — Longest Valid Parentheses</td>
+<td>Hard</td>
+<td>DP / Stack</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-23-apr-27-2d-dp">Day 23 (Apr 27) — 2D DP</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 62 — Unique Paths</td>
+<td>Medium</td>
+<td>Grid DP</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 64 — Minimum Path Sum</td>
+<td>Medium</td>
+<td>Grid DP</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 1143 — Longest Common Subsequence</td>
+<td>Medium</td>
+<td>Classic 2D DP</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 72 — Edit Distance</td>
+<td>Medium</td>
+<td>Classic 2D DP</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 518 — Coin Change II</td>
+<td>Medium</td>
+<td>Unbounded Knapsack</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 312 — Burst Balloons</td>
+<td>Hard</td>
+<td>Interval DP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-24-apr-28-dp-on-strings-knapsack">Day 24 (Apr 28) — DP on
+Strings + Knapsack</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 392 — Is Subsequence</td>
+<td>Easy</td>
+<td>Two Pointers / DP</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 583 — Delete Operation for Two Strings</td>
+<td>Medium</td>
+<td>LCS variant</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 416 — Partition Equal Subset Sum</td>
+<td>Medium</td>
+<td>0/1 Knapsack</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 494 — Target Sum</td>
+<td>Medium</td>
+<td>Knapsack / DFS</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 97 — Interleaving String</td>
+<td>Medium</td>
+<td>2D DP</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 115 — Distinct Subsequences</td>
+<td>Hard</td>
+<td>2D DP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-25-apr-29-dp-advanced-trees-state-machine">Day 25 (Apr 29) —
+DP Advanced (Trees, State Machine)</h3>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 337 — House Robber III</td>
+<td>Medium</td>
+<td>Tree DP</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 309 — Best Time to Buy and Sell Stock with Cooldown</td>
+<td>Medium</td>
+<td>State Machine DP</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 714 — Best Time to Buy and Sell Stock with Fee</td>
+<td>Medium</td>
+<td>State Machine DP</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 1049 — Last Stone Weight II</td>
+<td>Medium</td>
+<td>Knapsack</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 474 — Ones and Zeroes</td>
+<td>Medium</td>
+<td>2D Knapsack</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 1235 — Maximum Profit in Job Scheduling</td>
+<td>Hard</td>
+<td>DP + BS</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-26-apr-30-bit-manipulation-math">Day 26 (Apr 30) — Bit
+Manipulation + Math</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 136 — Single Number</td>
+<td>Easy</td>
+<td>XOR</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 191 — Number of 1 Bits</td>
+<td>Easy</td>
+<td>Bit manipulation</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 371 — Sum of Two Integers</td>
+<td>Medium</td>
+<td>Bit manipulation</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 29 — Divide Two Integers</td>
+<td>Medium</td>
+<td>Bit manipulation</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 50 — Pow(x, n)</td>
+<td>Medium</td>
+<td>Fast exponentiation</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 287 — Find the Duplicate Number</td>
+<td>Medium</td>
+<td>Floyd’s cycle</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-27-may-1-codeforces-virtual-contest">Day 27 (May 1) —
+Codeforces Virtual Contest</h3>
+<ul>
+<li>Pick any recent Div 2 contest (Round 900-950)</li>
+<li>Target: Solve A, B, C within 1.5 hours</li>
+<li>After contest: Upsolve D using editorial</li>
+</ul>
+<h3 id="day-28-may-2-mixed-hard-problems-faang-favorites">Day 28 (May 2)
+— Mixed Hard Problems (FAANG Favorites)</h3>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Difficulty</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LC 218 — The Skyline Problem</td>
+<td>Hard</td>
+<td>Heap + Sweep Line</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LC 329 — Longest Increasing Path in a Matrix</td>
+<td>Hard</td>
+<td>DFS + Memo</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LC 315 — Count of Smaller Numbers After Self</td>
+<td>Hard</td>
+<td>Merge Sort / BIT</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LC 10 — Regular Expression Matching</td>
+<td>Hard</td>
+<td>2D DP</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LC 41 — First Missing Positive</td>
+<td>Hard</td>
+<td>Cyclic Sort</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LC 224 — Basic Calculator</td>
+<td>Hard</td>
+<td>Stack</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-29-may-3-revision-weak-area-drill">Day 29 (May 3) — Revision
++ Weak Area Drill</h3>
+<ul>
+<li>Revisit all problems you couldn’t solve or took &gt;45 min</li>
+<li>Re-solve at least 5 without looking at solutions</li>
+<li>Write down patterns/templates for weak areas</li>
+<li>Do 2-3 CF problems at 1300-1400 rating</li>
+</ul>
+<h3 id="day-30-may-4-final-test-see-dsa_assignments.md">Day 30 (May 4) —
+FINAL TEST → See DSA_ASSIGNMENTS.md</h3>
+<hr />
+<h2 id="pattern-cheat-sheet">Pattern Cheat Sheet</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 37%" />
+<col style="width: 37%" />
+</colgroup>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>When to Use</th>
+<th>Key Problems</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Two Pointers</td>
+<td>Sorted array, pair finding</td>
+<td>3Sum, Container With Most Water</td>
+</tr>
+<tr>
+<td>Sliding Window</td>
+<td>Subarray/substring with constraint</td>
+<td>Min Window Substring, Longest Substring</td>
+</tr>
+<tr>
+<td>Binary Search on Answer</td>
+<td>Min/max optimization</td>
+<td>Koko Eating Bananas, Split Array</td>
+</tr>
+<tr>
+<td>Monotonic Stack</td>
+<td>Next greater/smaller element</td>
+<td>Daily Temperatures, Histogram</td>
+</tr>
+<tr>
+<td>BFS</td>
+<td>Shortest path (unweighted), level order</td>
+<td>Rotting Oranges, Word Ladder</td>
+</tr>
+<tr>
+<td>DFS + Memo</td>
+<td>Tree/graph with overlapping subproblems</td>
+<td>Longest Increasing Path</td>
+</tr>
+<tr>
+<td>Union Find</td>
+<td>Connected components, cycle detection</td>
+<td>Redundant Connection</td>
+</tr>
+<tr>
+<td>Topological Sort</td>
+<td>Dependency ordering</td>
+<td>Course Schedule</td>
+</tr>
+<tr>
+<td>0/1 Knapsack</td>
+<td>Subset selection with constraint</td>
+<td>Partition Equal Subset Sum</td>
+</tr>
+<tr>
+<td>Interval DP</td>
+<td>Merge/split ranges optimally</td>
+<td>Burst Balloons</td>
+</tr>
+<tr>
+<td>State Machine DP</td>
+<td>Multiple states per position</td>
+<td>Stock Buy/Sell with Cooldown</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Convert to PDF:
+<code>pandoc DSA_30_DAYS.md -o DSA_30_DAYS.pdf</code></em></p>
+</body>
+</html>
