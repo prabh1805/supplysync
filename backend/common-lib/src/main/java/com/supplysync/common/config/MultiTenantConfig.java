@@ -12,31 +12,31 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.sql.DataSource;
 
-/**
- * Wires up all multi-tenancy components.
- *
- * Any service that imports this config gets:
- * 1. TenantInterceptor registered on all requests
- * 2. Hibernate configured for schema-based multi-tenancy
- *
- * Usage in a service:
- *   @Import(MultiTenantConfig.class) on the main application class
- */
 @Configuration
 public class MultiTenantConfig implements WebMvcConfigurer {
 
-    // register the interceptor so it runs on every request
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new TenantInterceptor());
     }
 
-    // tell Hibernate to use our schema resolver and connection provider
     @Bean
-    public HibernatePropertiesCustomizer hibernatePropertiesCustomizer(DataSource dataSource) {
+    public TenantSchemaResolver tenantSchemaResolver() {
+        return new TenantSchemaResolver();
+    }
+
+    @Bean
+    public TenantConnectionProvider tenantConnectionProvider(DataSource dataSource) {
+        return new TenantConnectionProvider(dataSource);
+    }
+
+    @Bean
+    public HibernatePropertiesCustomizer hibernateMultiTenancyCustomizer(
+            TenantConnectionProvider connectionProvider,
+            TenantSchemaResolver schemaResolver) {
         return properties -> {
-            properties.put(MultiTenancySettings.MULTI_TENANT_CONNECTION_PROVIDER, new TenantConnectionProvider(dataSource));
-            properties.put(MultiTenancySettings.MULTI_TENANT_IDENTIFIER_RESOLVER, new TenantSchemaResolver());
+            properties.put(MultiTenancySettings.MULTI_TENANT_CONNECTION_PROVIDER, connectionProvider);
+            properties.put(MultiTenancySettings.MULTI_TENANT_IDENTIFIER_RESOLVER, schemaResolver);
         };
     }
 }

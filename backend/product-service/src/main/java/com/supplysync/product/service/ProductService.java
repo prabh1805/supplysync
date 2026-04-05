@@ -7,10 +7,12 @@ import com.supplysync.product.exception.InvalidRequestException;
 import com.supplysync.product.exception.ProductNotFoundException;
 import com.supplysync.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -52,11 +54,15 @@ public class ProductService {
         return mapToResponse(product);
     }
 
-    public List<ProductResponse> getAllProducts() {
-        return productRepository.findAll()
-                .stream()
-                .map(this::mapToResponse)
-                .toList();
+    public Page<ProductResponse> getAllProducts(int page, int size, String sortBy, String direction) {
+        Sort sort = direction.equalsIgnoreCase("desc")
+                ? Sort.by(sortBy).descending()
+                : Sort.by(sortBy).ascending();
+
+        PageRequest pageRequest = PageRequest.of(page, size, sort);
+
+        return productRepository.findAll(pageRequest)
+                .map(this::mapToResponse);
     }
 
     public ProductResponse updateProduct(UUID id, ProductRequest request) {
