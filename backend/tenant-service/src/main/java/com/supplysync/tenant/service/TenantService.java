@@ -9,8 +9,11 @@ import com.supplysync.tenant.exception.InvalidRequestException;
 import com.supplysync.tenant.exception.TenantAlreadyExistsException;
 import com.supplysync.tenant.exception.TenantNotFoundException;
 import com.supplysync.tenant.repository.TenantRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,8 +23,11 @@ import java.util.UUID;
 public class TenantService {
     private final TenantRepository tenantRepository;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Transactional
     public TenantResponse createTenant(TenantRequest tenantRequest) {
-        // Validate required fields
         if (tenantRequest.getName() == null || tenantRequest.getName().isBlank()) {
             throw new InvalidRequestException("Tenant name is required");
         }
@@ -29,7 +35,6 @@ public class TenantService {
             throw new InvalidRequestException("Subdomain is required");
         }
 
-        // Check for duplicates
         tenantRepository.findBySubdomain(tenantRequest.getSubdomain())
                 .ifPresent(existing -> {
                     throw new TenantAlreadyExistsException(
@@ -37,22 +42,26 @@ public class TenantService {
                     );
                 });
 
-        // Parse plan — defaults to FREE if not provided
         Plan plan = Plan.FREE;
         if (tenantRequest.getPlan() != null && !tenantRequest.getPlan().isBlank()) {
             plan = Plan.valueOf(tenantRequest.getPlan().toUpperCase());
-            // ↑ If someone sends "GOLD", this throws IllegalArgumentException
-            //   which our GlobalExceptionHandler catches and returns 400
         }
+
+        String schemaName = "tenant_" + tenantRequest.getSubdomain().toLowerCase();
 
         Tenant tenant = Tenant.builder()
                 .name(tenantRequest.getName())
                 .subdomain(tenantRequest.getSubdomain())
-                .dbSchema("tenant_" + tenantRequest.getSubdomain().toLowerCase())
+                .dbSchema(schemaName)
                 .plan(plan)
                 .build();
 
         tenantRepository.save(tenant);
+
+        // create the tenant's schema in PostgreSQL
+        // this is where the isolation happens — each tenant gets their own schema
+        createTenantSchema(schemaName);
+
         return mapToResponse(tenant);
     }
 
@@ -77,10 +86,6 @@ public class TenantService {
                 .stream()
                 .map(this::mapToResponse)
                 .toList();
-        // ↑ Cleaner than creating an ArrayList and forEach-ing.
-        //   .stream() converts the list to a stream
-        //   .map(this::mapToResponse) transforms each Tenant → TenantResponse
-        //   .toList() collects back into an immutable list
     }
 
     public TenantResponse updateTenantStatus(UUID tenantId, String status) {
@@ -89,12 +94,35 @@ public class TenantService {
                         "Tenant with id '" + tenantId + "' not found"
                 ));
 
-        // valueOf will throw IllegalArgumentException if status is invalid
-        // GlobalExceptionHandler catches that → returns 400
         Status newStatus = Status.valueOf(status.toUpperCase());
         tenant.setStatus(newStatus);
         tenantRepository.save(tenant);
         return mapToResponse(tenant);
+    }
+
+    /**
+     * Creates a new PostgreSQL schema for the tenant and sets up the initial tables.
+     * Each tenant gets isolated tables (products, orders, inventory, etc.)
+     */
+    private void createTenantSchema(String schemaName) {
+        // create the schema
+        entityManager.createNativeQuery("CREATE SCHEMA IF NOT EXISTS " + schemaName).executeUpdate();
+
+        // create the products table in the new schema
+        // more tables will be added as we build more services
+        entityManager.createNativeQuery(
+                "CREATE TABLE IF NOT EXISTS " + schemaName + ".products (" +
+                "id UUID PRIMARY KEY DEFAULT gen_random_uuid(), " +
+                "name VARCHAR(255) NOT NULL, " +
+                "description TEXT, " +
+                "sku VARCHAR(100) UNIQUE NOT NULL, " +
+                "price DECIMAL(10,2) NOT NULL, " +
+                "category VARCHAR(100), " +
+                "active BOOLEAN DEFAULT true, " +
+                "created_at TIMESTAMP NOT NULL DEFAULT NOW(), " +
+                "updated_at TIMESTAMP" +
+                ")"
+        ).executeUpdate();
     }
 
     private TenantResponse mapToResponse(Tenant tenant) {
