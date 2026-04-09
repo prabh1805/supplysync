@@ -105,11 +105,9 @@ public class TenantService {
      * Each tenant gets isolated tables (products, orders, inventory, etc.)
      */
     private void createTenantSchema(String schemaName) {
-        // create the schema
         entityManager.createNativeQuery("CREATE SCHEMA IF NOT EXISTS " + schemaName).executeUpdate();
 
-        // create the products table in the new schema
-        // more tables will be added as we build more services
+        // products table
         entityManager.createNativeQuery(
                 "CREATE TABLE IF NOT EXISTS " + schemaName + ".products (" +
                 "id UUID PRIMARY KEY DEFAULT gen_random_uuid(), " +
@@ -121,6 +119,20 @@ public class TenantService {
                 "active BOOLEAN DEFAULT true, " +
                 "created_at TIMESTAMP NOT NULL DEFAULT NOW(), " +
                 "updated_at TIMESTAMP" +
+                ")"
+        ).executeUpdate();
+
+        // inventory_items table
+        entityManager.createNativeQuery(
+                "CREATE TABLE IF NOT EXISTS " + schemaName + ".inventory_items (" +
+                "id UUID PRIMARY KEY DEFAULT gen_random_uuid(), " +
+                "product_id UUID NOT NULL, " +
+                "warehouse VARCHAR(255) NOT NULL, " +
+                "quantity INTEGER NOT NULL DEFAULT 0, " +
+                "min_stock_level INTEGER NOT NULL DEFAULT 10, " +
+                "created_at TIMESTAMP NOT NULL DEFAULT NOW(), " +
+                "updated_at TIMESTAMP, " +
+                "UNIQUE(product_id, warehouse)" +
                 ")"
         ).executeUpdate();
     }
