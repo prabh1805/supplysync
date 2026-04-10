@@ -135,6 +135,21 @@ public class TenantService {
                 "UNIQUE(product_id, warehouse)" +
                 ")"
         ).executeUpdate();
+
+        // suppliers table
+        entityManager.createNativeQuery(
+                "CREATE TABLE IF NOT EXISTS " + schemaName + ".suppliers (" +
+                "id UUID PRIMARY KEY DEFAULT gen_random_uuid(), " +
+                "name VARCHAR(255) NOT NULL, " +
+                "email VARCHAR(255) UNIQUE, " +
+                "phone VARCHAR(50) UNIQUE, " +
+                "address TEXT, " +
+                "rating DECIMAL(2,1) DEFAULT 0.0, " +
+                "active BOOLEAN DEFAULT true, " +
+                "created_at TIMESTAMP NOT NULL DEFAULT NOW(), " +
+                "updated_at TIMESTAMP" +
+                ")"
+        ).executeUpdate();
     }
 
     private TenantResponse mapToResponse(Tenant tenant) {
