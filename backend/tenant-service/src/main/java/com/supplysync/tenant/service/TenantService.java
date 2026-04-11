@@ -150,6 +150,32 @@ public class TenantService {
                 "updated_at TIMESTAMP" +
                 ")"
         ).executeUpdate();
+
+        // orders table
+        entityManager.createNativeQuery(
+                "CREATE TABLE IF NOT EXISTS " + schemaName + ".orders (" +
+                "id UUID PRIMARY KEY DEFAULT gen_random_uuid(), " +
+                "type VARCHAR(20) NOT NULL, " +
+                "status VARCHAR(20) NOT NULL DEFAULT 'DRAFT', " +
+                "supplier_id UUID, " +
+                "total_amount DECIMAL(12,2) NOT NULL DEFAULT 0, " +
+                "notes TEXT, " +
+                "created_at TIMESTAMP NOT NULL DEFAULT NOW(), " +
+                "updated_at TIMESTAMP" +
+                ")"
+        ).executeUpdate();
+
+        // order_items table
+        entityManager.createNativeQuery(
+                "CREATE TABLE IF NOT EXISTS " + schemaName + ".order_items (" +
+                "id UUID PRIMARY KEY DEFAULT gen_random_uuid(), " +
+                "order_id UUID NOT NULL REFERENCES " + schemaName + ".orders(id), " +
+                "product_id UUID NOT NULL, " +
+                "quantity INTEGER NOT NULL, " +
+                "unit_price DECIMAL(10,2) NOT NULL, " +
+                "total_price DECIMAL(10,2) NOT NULL" +
+                ")"
+        ).executeUpdate();
     }
 
     private TenantResponse mapToResponse(Tenant tenant) {
