@@ -8,6 +8,8 @@ import com.supplysync.order.entity.OrderType;
 import com.supplysync.order.exception.InvalidOrderStateException;
 import com.supplysync.order.exception.InvalidRequestException;
 import com.supplysync.order.exception.OrderNotFoundException;
+import com.supplysync.order.event.OrderEvent;
+import com.supplysync.order.event.OrderEventProducer;
 import com.supplysync.order.repository.OrderRepository;
 import com.supplysync.order.service.state.OrderState;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final OrderEventProducer eventProducer;
 
     @Transactional
     public OrderResponse createOrder(OrderRequest request) {
@@ -94,6 +97,17 @@ public class OrderService {
 
         order.setStatus(targetStatus);
         orderRepository.save(order);
+
+        // publish event to Kafka so other services can react
+        eventProducer.publish(OrderEvent.builder()
+                .orderId(order.getId().toString())
+                .tenantId(com.supplysync.order.config.TenantContext.getSchema())
+                .type(order.getType().name())
+                .status(targetStatus.name())
+                .supplierId(order.getSupplierId() != null ? order.getSupplierId().toString() : null)
+                .totalAmount(order.getTotalAmount())
+                .build());
+
         return mapToResponse(order);
     }
 
