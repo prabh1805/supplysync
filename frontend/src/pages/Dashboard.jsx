@@ -2,7 +2,7 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const menuItems = [
-  { name: 'Dashboard', icon: '📊', active: true },
+  { name: 'Overview', icon: '◻️', active: true },
   { name: 'Products', icon: '📦' },
   { name: 'Inventory', icon: '🏭' },
   { name: 'Suppliers', icon: '🤝' },
@@ -10,13 +10,7 @@ const menuItems = [
   { name: 'Shipments', icon: '🚚' },
   { name: 'Team', icon: '👥' },
   { name: 'Notifications', icon: '🔔' },
-];
-
-const stats = [
-  { label: 'Total Products', value: '—', color: 'from-blue-500 to-blue-600' },
-  { label: 'Active Orders', value: '—', color: 'from-emerald-500 to-emerald-600' },
-  { label: 'Low Stock Items', value: '—', color: 'from-amber-500 to-amber-600' },
-  { label: 'Pending Shipments', value: '—', color: 'from-purple-500 to-purple-600' },
+  { name: 'Settings', icon: '⚙️' },
 ];
 
 export default function Dashboard() {
@@ -29,87 +23,102 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex">
+    <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-slate-900 border-r border-slate-800 flex flex-col">
-        <div className="p-6 border-b border-slate-800">
-          <h1 className="text-xl font-bold text-white">SupplySync</h1>
-          <p className="text-xs text-slate-400 mt-1">{localStorage.getItem('subdomain') || 'tenant'}.supplysync.com</p>
+      <aside className="w-60 bg-white border-r border-gray-200 flex flex-col">
+        <div className="p-5 border-b border-gray-100">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 bg-indigo-600 rounded-md flex items-center justify-center">
+              <span className="text-white text-xs font-bold">S</span>
+            </div>
+            <span className="text-sm font-bold text-gray-900">SupplySync</span>
+          </div>
+          <p className="text-xs text-gray-400 mt-1.5 ml-9">{localStorage.getItem('subdomain') || 'workspace'}</p>
         </div>
 
-        <nav className="flex-1 p-4 space-y-1">
+        <nav className="flex-1 p-3 space-y-0.5">
           {menuItems.map((item) => (
             <button
               key={item.name}
-              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-colors ${
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${
                 item.active
-                  ? 'bg-blue-600/20 text-blue-400'
-                  : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                  ? 'bg-indigo-50 text-indigo-700 font-medium'
+                  : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
               }`}
             >
-              <span>{item.icon}</span>
+              <span className="text-base">{item.icon}</span>
               {item.name}
             </button>
           ))}
         </nav>
 
-        <div className="p-4 border-t border-slate-800">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold">
+        <div className="p-4 border-t border-gray-100">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold">
               {user?.fullName?.charAt(0) || 'U'}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-white truncate">{user?.fullName}</p>
-              <p className="text-xs text-slate-400 truncate">{user?.role}</p>
+              <p className="text-sm font-medium text-gray-900 truncate">{user?.fullName}</p>
+              <p className="text-xs text-gray-400 truncate">{user?.role?.replace('_', ' ')}</p>
             </div>
           </div>
-          <button
-            onClick={handleLogout}
-            className="w-full py-2 text-sm text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
-          >
-            Sign Out
+          <button onClick={handleLogout} className="w-full mt-3 py-1.5 text-xs text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors">
+            Sign out
           </button>
         </div>
       </aside>
 
-      {/* Main content */}
+      {/* Main */}
       <main className="flex-1 p-8">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-white">Welcome back, {user?.fullName?.split(' ')[0]}</h2>
-          <p className="text-slate-400 mt-1">Here's what's happening with your supply chain</p>
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Overview</h1>
+            <p className="text-sm text-gray-500 mt-0.5">Welcome back, {user?.fullName?.split(' ')[0]}</p>
+          </div>
+          <button className="bg-indigo-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors font-medium">
+            + New Order
+          </button>
         </div>
 
-        {/* Stats grid */}
-        <div className="grid grid-cols-4 gap-6 mb-8">
-          {stats.map((stat) => (
-            <div key={stat.label} className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-              <p className="text-sm text-slate-400">{stat.label}</p>
-              <p className={`text-3xl font-bold mt-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
-                {stat.value}
+        {/* Stats */}
+        <div className="grid grid-cols-4 gap-5 mb-8">
+          {[
+            { label: 'Total Products', value: '—', change: '+12%', up: true },
+            { label: 'Active Orders', value: '—', change: '+8%', up: true },
+            { label: 'In Transit', value: '—', change: '3 carriers', up: null },
+            { label: 'Low Stock', value: '—', change: 'Needs attention', up: false },
+          ].map((stat) => (
+            <div key={stat.label} className="bg-white rounded-xl p-5 border border-gray-200">
+              <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">{stat.label}</p>
+              <p className="text-2xl font-bold text-gray-900 mt-2">{stat.value}</p>
+              <p className={`text-xs mt-1 ${stat.up === true ? 'text-emerald-600' : stat.up === false ? 'text-amber-600' : 'text-gray-400'}`}>
+                {stat.change}
               </p>
             </div>
           ))}
         </div>
 
-        {/* Quick actions */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-white mb-4">Quick Actions</h3>
-          <div className="grid grid-cols-3 gap-4">
-            <button className="p-4 bg-slate-800 hover:bg-slate-700 rounded-lg text-left transition-colors">
-              <span className="text-2xl">➕</span>
-              <p className="text-white font-medium mt-2">Add Product</p>
-              <p className="text-slate-400 text-sm">Add a new product to catalog</p>
-            </button>
-            <button className="p-4 bg-slate-800 hover:bg-slate-700 rounded-lg text-left transition-colors">
-              <span className="text-2xl">📝</span>
-              <p className="text-white font-medium mt-2">Create Order</p>
-              <p className="text-slate-400 text-sm">Place a purchase order</p>
-            </button>
-            <button className="p-4 bg-slate-800 hover:bg-slate-700 rounded-lg text-left transition-colors">
-              <span className="text-2xl">👥</span>
-              <p className="text-white font-medium mt-2">Invite Team</p>
-              <p className="text-slate-400 text-sm">Add members to your org</p>
-            </button>
+        {/* Recent activity */}
+        <div className="grid grid-cols-2 gap-6">
+          <div className="bg-white rounded-xl border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-semibold text-gray-900">Recent Orders</h3>
+              <button className="text-xs text-indigo-600 hover:text-indigo-700 font-medium">View all</button>
+            </div>
+            <div className="space-y-3">
+              <p className="text-sm text-gray-400 text-center py-8">No orders yet. Create your first order.</p>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-semibold text-gray-900">Low Stock Alerts</h3>
+              <button className="text-xs text-indigo-600 hover:text-indigo-700 font-medium">View all</button>
+            </div>
+            <div className="space-y-3">
+              <p className="text-sm text-gray-400 text-center py-8">No alerts. All stock levels are healthy.</p>
+            </div>
           </div>
         </div>
       </main>

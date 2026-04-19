@@ -26,28 +26,43 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white tracking-tight">SupplySync</h1>
-          <p className="text-blue-300 mt-2">Supply Chain Management Platform</p>
+    <div className="min-h-screen bg-gray-50 flex">
+      {/* Left panel */}
+      <div className="hidden lg:flex lg:w-1/2 bg-indigo-600 items-center justify-center p-12">
+        <div className="max-w-md">
+          <div className="flex items-center gap-2 mb-8">
+            <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold">S</span>
+            </div>
+            <span className="text-2xl font-bold text-white">SupplySync</span>
+          </div>
+          <h2 className="text-3xl font-bold text-white leading-tight">
+            Manage your entire supply chain from one platform.
+          </h2>
+          <p className="text-indigo-200 mt-4 leading-relaxed">
+            Products, inventory, suppliers, orders, and shipments — all connected, all in real-time.
+          </p>
         </div>
+      </div>
 
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/10">
-          <h2 className="text-2xl font-semibold text-white mb-6">Welcome back</h2>
+      {/* Right panel */}
+      <div className="flex-1 flex items-center justify-center p-8">
+        <div className="w-full max-w-sm">
+          <h1 className="text-2xl font-bold text-gray-900">Sign in</h1>
+          <p className="text-gray-500 mt-1 text-sm">Welcome back. Enter your credentials.</p>
 
           {error && (
-            <div className="bg-red-500/20 border border-red-500/50 text-red-200 px-4 py-3 rounded-lg mb-4 text-sm">
+            <div className="mt-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="mt-8 space-y-5">
             <div>
-              <label className="block text-sm font-medium text-blue-200 mb-1">Email</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
               <input
                 type="email"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 placeholder="you@company.com"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -55,10 +70,10 @@ export default function Login() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-blue-200 mb-1">Password</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
               <input
                 type="password"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 placeholder="••••••••"
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
@@ -68,17 +83,15 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+              className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-50"
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? 'Signing in...' : 'Sign in'}
             </button>
           </form>
 
-          <p className="text-center text-gray-400 mt-6 text-sm">
-            New to SupplySync?{' '}
-            <Link to="/register" className="text-blue-400 hover:text-blue-300 font-medium">
-              Create an account
-            </Link>
+          <p className="text-center text-gray-500 mt-6 text-sm">
+            Don't have an account?{' '}
+            <Link to="/register" className="text-indigo-600 hover:text-indigo-700 font-medium">Create one</Link>
           </p>
         </div>
       </div>
