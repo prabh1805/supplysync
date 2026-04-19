@@ -6,61 +6,82 @@ import { useAuth } from '../context/AuthContext';
 export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { loginUser } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
     try {
       const res = await login(form);
       loginUser(res.data);
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <h1 style={styles.title}>SupplySync</h1>
-        <p style={styles.subtitle}>Sign in to your account</p>
-        {error && <p style={styles.error}>{error}</p>}
-        <form onSubmit={handleSubmit}>
-          <input
-            style={styles.input}
-            type="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-            required
-          />
-          <input
-            style={styles.input}
-            type="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={(e) => setForm({ ...form, password: e.target.value })}
-            required
-          />
-          <button style={styles.button} type="submit">Sign In</button>
-        </form>
-        <p style={styles.link}>
-          Don't have an account? <Link to="/register">Register</Link>
-        </p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 flex items-center justify-center px-4">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-white tracking-tight">SupplySync</h1>
+          <p className="text-blue-300 mt-2">Supply Chain Management Platform</p>
+        </div>
+
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/10">
+          <h2 className="text-2xl font-semibold text-white mb-6">Welcome back</h2>
+
+          {error && (
+            <div className="bg-red-500/20 border border-red-500/50 text-red-200 px-4 py-3 rounded-lg mb-4 text-sm">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-blue-200 mb-1">Email</label>
+              <input
+                type="email"
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="you@company.com"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-blue-200 mb-1">Password</label>
+              <input
+                type="password"
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="••••••••"
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+            >
+              {loading ? 'Signing in...' : 'Sign In'}
+            </button>
+          </form>
+
+          <p className="text-center text-gray-400 mt-6 text-sm">
+            New to SupplySync?{' '}
+            <Link to="/register" className="text-blue-400 hover:text-blue-300 font-medium">
+              Create an account
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
 }
-
-const styles = {
-  container: { display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', background: '#f0f2f5' },
-  card: { background: '#fff', padding: '40px', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)', width: '400px' },
-  title: { margin: 0, fontSize: '28px', textAlign: 'center', color: '#1a1a2e' },
-  subtitle: { textAlign: 'center', color: '#666', marginBottom: '24px' },
-  input: { width: '100%', padding: '12px', marginBottom: '16px', border: '1px solid #ddd', borderRadius: '6px', fontSize: '14px', boxSizing: 'border-box' },
-  button: { width: '100%', padding: '12px', background: '#1a1a2e', color: '#fff', border: 'none', borderRadius: '6px', fontSize: '16px', cursor: 'pointer' },
-  error: { color: '#e74c3c', textAlign: 'center', marginBottom: '16px' },
-  link: { textAlign: 'center', marginTop: '16px', color: '#666' },
-};

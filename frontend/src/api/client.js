@@ -4,7 +4,6 @@ const API = axios.create({
   baseURL: 'http://localhost:8090/api/v1',
 });
 
-// attach JWT token to every request
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
