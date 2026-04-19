@@ -1,8 +1,6 @@
 package com.supplysync.auth.controller;
 
-import com.supplysync.auth.dto.AuthResponse;
-import com.supplysync.auth.dto.LoginRequest;
-import com.supplysync.auth.dto.RegisterRequest;
+import com.supplysync.auth.dto.*;
 import com.supplysync.auth.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthController {
     private final UserService userService;
+
+    @PostMapping("/onboard")
+    public ResponseEntity<OnboardResponse> onboard(@RequestBody OnboardRequest request) {
+        OnboardResponse res = userService.onboard(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(res);
+    }
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
