@@ -176,6 +176,20 @@ public class TenantService {
                 "total_price DECIMAL(10,2) NOT NULL" +
                 ")"
         ).executeUpdate();
+
+        // shipments table
+        entityManager.createNativeQuery(
+                "CREATE TABLE IF NOT EXISTS " + schemaName + ".shipments (" +
+                "id UUID PRIMARY KEY DEFAULT gen_random_uuid(), " +
+                "order_id UUID NOT NULL, " +
+                "carrier VARCHAR(100) NOT NULL, " +
+                "tracking_number VARCHAR(255), " +
+                "status VARCHAR(20) NOT NULL DEFAULT 'CREATED', " +
+                "estimated_delivery DATE, " +
+                "created_at TIMESTAMP NOT NULL DEFAULT NOW(), " +
+                "updated_at TIMESTAMP" +
+                ")"
+        ).executeUpdate();
     }
 
     private TenantResponse mapToResponse(Tenant tenant) {
